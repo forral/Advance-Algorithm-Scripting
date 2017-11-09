@@ -6,7 +6,7 @@ I don't like solving these challenges in the Free Code Camp website, so I use an
 
 Keep in mind that I didn't refactor any of the code in this challenge. I know I can write cleaner code but the objective is to finish has quick as I can. Maybe in a near future I go back and clean all the mess.
 
-- [x] [Validate US Telephone Numbers](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/validate-US-telephone-numbers-incomplete.html)
+- [x] [Validate US Telephone Numbers](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/validate-US-telephone-numbers.html)
 - [ ] Record Collection
 - [ ] Symmetric Difference
 - [ ] Exact Change
