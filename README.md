@@ -6,12 +6,12 @@ I don't like solving these challenges in the Free Code Camp website, so I use an
 
 Keep in mind that I didn't refactor any of the code in this challenge. I know I can write cleaner code but the objective is to finish has quick as I can. Maybe in a near future I go back and clean all the mess.
 
-- [x] [Validate US Telephone Numbers Incomplete](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/validate-US-telephone-numbers-incomplete.html)
-- [ ] Record Collection Complete
-- [ ] Symmetric Difference Incomplete
-- [ ] Exact Change Incomplete
-- [ ] Inventory Update Incomplete
-- [ ] No repeats please Incomplete
-- [ ] Make a Person Incomplete
-- [ ] Map the Debris Incomplete
-- [ ] Pairwise Incomplete
+- [x] [Validate US Telephone Numbers](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/validate-US-telephone-numbers-incomplete.html)
+- [ ] Record Collection
+- [ ] Symmetric Difference
+- [ ] Exact Change
+- [ ] Inventory Update
+- [ ] No repeats please
+- [ ] Make a Person
+- [ ] Map the Debris
+- [ ] Pairwise
