@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Symmetric Difference</title>
+	<style>
+		header {
+			background: white;
+			padding: 1px 10px 10px 10px;
+		}
+		code {
+			color: blueviolet;
+			background: lightgrey;
+			padding: 1px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Symmetric Difference</h1>
+		<p>Create a function that takes two or more arrays and returns an array of the <code>symmetric difference</code> (<code>△</code> or <code>⊕</code>) of the provided arrays.</p>
+		<p>Given two sets (for example set <code>A = {1, 2, 3}</code> and set <code>B = {2, 3, 4}</code>), the mathematical term "symmetric difference" of two
+		sets is the set of elements which are in either of the two sets, but not in both (<code>A △ B = C = {1, 4}</code>). For every additional
+		symmetric difference you take (say on a set <code>D = {2, 3}</code>), you should get the set with elements which are in either of the
+		two the sets but not both (<code>C △ D = {1, 4} △ {2, 3} = {1, 2, 3, 4}</code>).</p>
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce?v=b">Array.prototype.reduce()</a></li>
+			<li><a href="https://www.youtube.com/watch?v=PxffSUQRkG4">Symmetric Difference</a></li>
+		</ul>
+	</header>
+	<script src="simple-test-lib.js"></script>
+	<script>
+
+		function sym(args) {
+			return args;
+		}
+
+		tests({
+
+
+			'sym([1, 2, 3], [5, 2, 1, 4]) should return [3, 4, 5].': function() {
+				var test = sym([1, 2, 3], [5, 2, 1, 4]);
+				eq(test[0], 3);
+				eq(test[1], 4);
+				eq(test[2], 5);
+			},
+
+			'sym([1, 2, 3], [5, 2, 1, 4]) should contain only three elements.': function() {
+				var test = sym([1, 2, 3], [5, 2, 1, 4]);
+				eq(test.length, 3);
+			},
+
+			'sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should return [1, 4, 5]': function() {
+				var test = sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);
+				eq(test[0], 1);
+				eq(test[1], 4);
+				eq(test[2], 5);
+			},
+
+			'sym([1, 2, 5], [2, 3, 5], [3, 4, 5]) should contain only three elements.': function() {
+				var test = sym([1, 2, 5], [2, 3, 5], [3, 4, 5]);
+				eq(test.length, 3);
+			},
+
+			'sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should return [1, 4, 5].': function() {
+				var test = sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
+				eq(test[0], 1);
+				eq(test[0], 4);
+				eq(test[0], 5);
+			},
+
+			'sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should contain only three elements.': function() {
+				var test = sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
+				eq(test.length, 3);
+			},
+
+			'sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]) should return [2, 3, 4, 6, 7].': function() {
+				var test = sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]);
+				eq(test[0], 2);
+				eq(test[1], 3);
+				eq(test[2], 4);
+				eq(test[3], 6);
+				eq(test[4], 7);
+			},
+
+			'sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]) should contain only five elements.': function() {
+				var test = sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3]);
+				eq(test.length, 5);
+			},
+
+			'sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]) should return [1, 2, 4, 5, 6, 7, 8, 9].': function() {
+				var test = sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
+				eq(test[0], 1);
+				eq(test[1], 2);
+				eq(test[2], 4);
+				eq(test[3], 5);
+				eq(test[4], 6);
+				eq(test[5], 7);
+				eq(test[6], 8);
+				eq(test[7], 9);
+			},
+
+			'sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]) should contain only eight elements.': function() {
+				var test = sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1]);
+				eq(test.length, 8)
+			}
+			
+		});
+	</script>
+</body>
+</html>
