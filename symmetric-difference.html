@@ -34,11 +34,39 @@
 	<script>
 
 		function sym(args) {
-			return args;
+
+			// converting the function arguments passed into an array;
+			arg = [...arguments];
+
+			function diffArray(arr1, arr2) {
+					var newArr = [];
+
+					// iterate through arr2 to catch what's not in the arr1
+					for (var i = 0; i < arr1.length; i++) {
+							if (arr2.indexOf(arr1[i]) === -1) {
+									newArr.push(arr1[i]);
+							}
+					}
+
+					// iterate through arr1 to catch what's not in the arr2
+					for (var j = 0; j < arr2.length; j++) {
+							if (arr1.indexOf(arr2[j]) === -1) {
+									newArr.push(arr2[j]);
+							}
+					}
+
+					return newArr;
+			}
+
+			return arg.reduce(diffArray)
+				.sort()
+				.filter(function (elem, index, self) {
+					return index === self.indexOf(elem);
+			});
+
 		}
 
 		tests({
-
 
 			'sym([1, 2, 3], [5, 2, 1, 4]) should return [3, 4, 5].': function() {
 				var test = sym([1, 2, 3], [5, 2, 1, 4]);
@@ -67,8 +95,8 @@
 			'sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should return [1, 4, 5].': function() {
 				var test = sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]);
 				eq(test[0], 1);
-				eq(test[0], 4);
-				eq(test[0], 5);
+				eq(test[1], 4);
+				eq(test[2], 5);
 			},
 
 			'sym([1, 1, 2, 5], [2, 2, 3, 5], [3, 4, 5, 5]) should contain only three elements.': function() {
