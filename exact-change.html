@@ -41,34 +41,49 @@
   <script src="simple-test-lib.js"></script>
   <script>
 
-    // Example cash-in-drawer array:
-    // [["PENNY", 1.01],
-    // ["NICKEL", 2.05],
-    // ["DIME", 3.10],
-    // ["QUARTER", 4.25],
-    // ["ONE", 90.00],
-    // ["FIVE", 55.00],
-    // ["TEN", 20.00],
-    // ["TWENTY", 60.00],
-    // ["ONE HUNDRED", 100.00]]
-
     var moneyValue = [
-      {name: 'PENNY',      value:  0.01}, // [["PENNY", 1.01],
-      {name: 'NICKEL',     value:  0.05}, // ["NICKEL", 2.05],
-      {name: 'DIME',       value:  0.10}, // ["DIME", 3.10],
-      {name: 'QUARTER',    value:  0.25}, // ["QUARTER", 4.25],
-      {name: 'ONE',        value:  1.00}, // ["ONE", 90.00],
-      {name: 'FIVE',       value:  5.00}, // ["FIVE", 55.00],
-      {name: 'TEN',        value:  10.00},// ["TEN", 20.00],
-      {name: 'TWENTY',     value:  20.00},// ["TWENTY", 60.00],
-      {name: 'ON HUNDRED', value: 100.00} // ["ONE HUNDRED", 100.00]]
+      { name: "ON HUNDRED", value: 100.00}, // ["ONE HUNDRED", 100]
+      { name: "TWENTY",     value: 20.00},  // ["TWENTY", 60]
+      { name: "TEN",        value: 10.00},  // ["TEN", 20]
+      { name: "FIVE",       value: 5.00},   // ["FIVE", 55]
+      { name: "ONE",        value: 1.00},   // ["ONE", 90]
+      { name: "QUARTER",    value: 0.25},   // ["QUARTER", 4.25]
+      { name: "DIME",       value: 0.10},   // ["DIME", 3.1]
+      { name: "NICKEL",     value: 0.05},   // ["NICKEL", 2.05]
+      { name: "PENNY",      value: 0.01}    // ["PENNY", 1.01]
     ];
 
     function checkCashRegister(price, cash, cid) {
-     var change = cash - price;
-     // sum all the cash in the cid
-     var totalCDI = cid.reduce((acc, currentValue) => acc + currentValue[1], 0.0).toFixed(2);
-     console.log(typeof totalCDI);
+      var change = cash - price;
+      // sum all the cash in the cid
+      var totalCID = cid.reduce((acc, currentValue) => acc + currentValue[1], 0.0).toFixed(2);
+      
+      // Return the string "Insufficient Funds" if cash-in-drawer is less than the change due
+      if (totalCID < change) {
+        return 'Insufficient Funds';
+      } else if (totalCID === change) {
+        return 'Closed';
+      }
+
+      cid = cid.reverse();
+    
+      var result = moneyValue.reduce(function(acc, currentValue, index){
+        if (change >= currentValue.value) {
+          var currentTotal = 0.0;
+          while (change >= currentValue.value && cid[index][1] >= currentValue.value) {
+            currentTotal += currentValue.value;
+            change -= currentValue.value;
+            change = Math.round(change * 100) / 100;
+            cid[index][1] -= currentValue.value;
+          }
+          acc.push([currentValue.name, currentTotal]);
+          return acc;
+        } else {
+          return acc;
+        }
+      }, []);
+
+      return result.length > 0 && change === 0 ? result : 'Insufficient Funds';
     }
 
     tests({
@@ -78,21 +93,21 @@
         eq(Array.isArray(test), true);
       },
 
-      // 'It should return a string.': function() {
-      //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-      //   eq(typeof test, 'string');
-      // },
+      'It should return a string.': function() {
+        var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+        eq(typeof test, 'string');
+      },
 
-      // 'It also should return a string.': function() {
-      //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-      //   eq(typeof test, 'string');
-      // },
+      'It also should return a string.': function() {
+        var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+        eq(typeof test, 'string');
+      },
 
-      // 'It should return [["QUARTER", 0.50]].': function() {
-      //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
-      //   eq(test[0][0], 'QUARTER');
-      //   eq(test[0][1], 0.50);
-      // },
+      'It should return [["QUARTER", 0.50]].': function() {
+        var test = checkCashRegister(19.50, 20.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
+        eq(test[0][0], 'QUARTER');
+        eq(test[0][1], 0.50);
+      },
 
       // 'It should return [["TWENTY", 60.00], ["TEN", 20.00], ["FIVE", 15.00], ["ONE", 1.00], ["QUARTER", 0.50], ["DIME", 0.20], ["PENNY", 0.04]].': function() {
       //   var test = checkCashRegister(3.26, 100.00, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.10], ["QUARTER", 4.25], ["ONE", 90.00], ["FIVE", 55.00], ["TEN", 20.00], ["TWENTY", 60.00], ["ONE HUNDRED", 100.00]]);
@@ -112,20 +127,20 @@
       //   eq(test[6][1], '0.04');
       // },
 
-      // 'It should return "Insufficient Funds(1)".': function() {
-      //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-      //   eq(test, 'Insufficient Funds');
-      // },
+      'It should return "Insufficient Funds(1)".': function() {
+        var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+        eq(test, 'Insufficient Funds');
+      },
 
       // 'It should return "Insufficient Funds(2)".': function() {
       //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.01], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 1.00], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
       //   eq(test, 'Insufficient Funds');
       // },
 
-      // 'It should return "Closed".': function() {
-      //   var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
-      //   eq(test, 'Closed');
-      // }
+      'It should return "Closed".': function() {
+        var test = checkCashRegister(19.50, 20.00, [["PENNY", 0.50], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]);
+        eq(test, 'Closed');
+      }
 
     });
   </script>
