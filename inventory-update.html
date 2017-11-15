@@ -6,15 +6,20 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Inventory Update</title>
 	<style>
-		header {
-			background: white;
-			padding: 1px 10px 10px 10px;
-		}
-		code {
-			color: blueviolet;
-			background: lightgrey;
-			padding: 1px;
-		}
+    html {
+      font-family: 'helvetica neue';
+    }
+    header {
+      background: white;
+      padding: 1px 10px 10px 10px;
+    }
+    code {
+      font-family: 'Courier New';
+      font-size: 14px;
+      color: blueviolet;
+      background: lightgrey;
+      padding: 1px;
+    }
 	</style>
 </head>
 <body>
@@ -47,7 +52,24 @@
 
 		function updateInventory(arr1, arr2) {
 			// All inventory must be accounted for or you're fired!
-			return arr1;
+
+
+			for (let i = 0; i < arr2.length; i++) {
+				for (let j = 0; j < arr1.length; j++) {
+					var counter = 0;
+					if (arr2[i][1] === arr1[j][1]) {
+						counter++;
+						// Update the current existing inventory item quantities (in arr1).
+						arr1[j][0] = arr1[j][0] + arr2[j][0]
+					// If an item cannot be found, add the new item and quantity into the inventory array.
+					} else if (counter === 0 && arr1[j] === arr1[j].length - 1) {
+						arr1.push([arr2[i]][0], arr2[i][1]);
+					}
+				}
+			}
+
+			
+			return arr1
 		}
 
 		// ........... TESTS ...........
