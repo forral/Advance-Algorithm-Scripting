@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Inventory Update</title>
+	<style>
+		header {
+			background: white;
+			padding: 1px 10px 10px 10px;
+		}
+		code {
+			color: blueviolet;
+			background: lightgrey;
+			padding: 1px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Inventory Update</h1>
+		<p>Compare and update the inventory stored in a 2D array against a second 2D array of a fresh delivery. Update the current existing
+		inventory item quantities (in <code>arr1</code>). If an item cannot be found, add the new item and quantity into the inventory array.
+		The returned inventory array should be in alphabetical order by item.</p>   
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Global Array Object</a></li>
+		</ul>
+	</header>
+	<script src="simple-test-lib.js"></script>
+	<script>
+
+		// Example inventory lists
+		// var curInv = [
+		// 	[21, "Bowling Ball"],
+		// 	[2, "Dirty Sock"],
+		// 	[1, "Hair Pin"],
+		// 	[5, "Microphone"]
+		// ];
+
+		// var newInv = [
+		// 	[2, "Hair Pin"],
+		// 	[3, "Half-Eaten Apple"],
+		// 	[67, "Bowling Ball"],
+		// 	[7, "Toothpaste"]
+		// ];
+
+		function updateInventory(arr1, arr2) {
+			// All inventory must be accounted for or you're fired!
+			return arr1;
+		}
+
+		// ........... TESTS ...........
+
+		tests({
+
+			'The function updateInventory should return an array.': function() {
+				var testForArray = updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]);
+				eq(Array.isArray(testForArray), true); 
+			},
+
+			'should return an array with a length of 6.': function() {
+				var arrayTest = updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]).length
+				eq(arrayTest, 6);
+			},
+
+			'should return [[88, "Bowling Ball"], [2, "Dirty Sock"], [3, "Hair Pin"], [3, "Half-Eaten Apple"], [5, "Microphone"], [7, "Toothpaste"]].': function() {
+				var test = updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]);
+				eq(test[0][0], 88);
+				eq(test[0][1], 'Bowling Ball');
+				eq(test[1][0], 2);
+				eq(test[1][1], 'Dirty Sock');
+				eq(test[2][0], 3);
+				eq(test[2][1], 'Hair Pin');
+				eq(test[3][0], 3);
+				eq(test[3][1], 'Half-Eaten Apple');
+				eq(test[4][0], 5);
+				eq(test[4][1], 'Microphone');
+				eq(test[5][0], 7);
+				eq(test[5][1], 'Toothpaste');
+			},
+
+			'It should return [[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]].': function() {
+				var test = updateInventory([[21, "Bowling Ball"], [2, "Dirty Sock"], [1, "Hair Pin"], [5, "Microphone"]], []);
+				eq(test[0][0], 21);
+				eq(test[0][1], 'Bowling Ball');
+				eq(test[1][0], 2);
+				eq(test[1][1], 'Dirty Sock');
+				eq(test[2][0], 1);
+				eq(test[2][1], 'Hair Pin');
+				eq(test[3][0], 5);
+				eq(test[3][1], 'Microphone');
+			},
+
+			'It should return [[67, "Bowling Ball"], [2, "Hair Pin"], [3, "Half-Eaten Apple"], [7, "Toothpaste"]].': function() {
+				var test = updateInventory([], [[2, "Hair Pin"], [3, "Half-Eaten Apple"], [67, "Bowling Ball"], [7, "Toothpaste"]]);
+				eq(test[0][0], 67);
+				eq(test[0][1], 'Bowling Ball');
+				eq(test[1][0], 2);
+				eq(test[1][1], 'Hair Pin');
+				eq(test[2][0], 3);
+				eq(test[2][1], 'Half-Eaten Apple');
+				eq(test[3][0], 7);
+				eq(test[3][1], 'Toothpaste');
+			},
+
+			'It should return [[1, "Bowling Ball"], [0, "Dirty Sock"], [1, "Hair Pin"], [1, "Half-Eaten Apple"], [0, "Microphone"], [1, "Toothpaste"]].': function() {
+				var test = updateInventory([[0, "Bowling Ball"], [0, "Dirty Sock"], [0, "Hair Pin"], [0, "Microphone"]], [[1, "Hair Pin"], [1, "Half-Eaten Apple"], [1, "Bowling Ball"], [1, "Toothpaste"]]);
+				eq(test[0][0], 0);
+				eq(test[0][1], 'Bowling Ball');
+				eq(test[1][0], 0);
+				eq(test[1][1], 'Dirty Sock');
+				eq(test[2][0], 1);
+				eq(test[2][1], 'Hair Pin');
+				eq(test[3][0], 1);
+				eq(test[3][1], 'Half-Eaten Apple');
+				eq(test[4][0], 0);
+				eq(test[4][1], 'Microphone');
+				eq(test[5][0], 1);
+				eq(test[5][1], 'Toothpaste');
+			}
+		});
+	</script>
+</body>
+</html>
