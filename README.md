@@ -10,7 +10,7 @@ Keep in mind that I didn't refactor any of the code in this challenge. I know I 
 - [x] [Record Collection](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/record-collection.html)
 - [x] [Symmetric Difference](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/symmetric-difference.html)
 - [x] [Exact Change](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/exact-change.html)
-- [ ] Inventory Update
+- [x] [Inventory Update](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/inventory-update.html)
 - [ ] No repeats please
 - [ ] Make a Person
 - [ ] Map the Debris
