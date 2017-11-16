@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>No repeats please</title>
+	<style>
+    html {
+      font-family: 'helvetica neue';
+    }
+    header {
+      background: white;
+      padding: 1px 10px 10px 10px;
+    }
+    code {
+      font-family: 'Courier New';
+      font-size: 14px;
+      color: blueviolet;
+      background: lightgrey;
+      padding: 1px;
+    }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>No repeats please</h1>
+		<p>Return the number of total permutations of the provided string that don't have repeated consecutive letters. Assume that
+		all characters in the provided string are each unique.</p>
+		<p>For example, <code>aab</code> should return 2 because it has 6 total permutations (<code>aab</code>, <code>aab</code>, <code>aba</code>, <code>aba</code>, <code>baa</code>, <code>baa</code>), but only 2 of them (<code>aba</code>
+		and <code>aba</code>) don't have the same letter (in this case <code>a</code>) repeating.</p>
+		<ul>
+			<li><a href="https://www.mathsisfun.com/combinatorics/combinations-permutations.html">Permutations</a></li>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp">RegExp</a></li>
+		</ul>
+	</header>
+	<script src="simple-test-lib.js"></script>
+	<script>
+
+		function permAlone(str) {
+			return str;
+		}
+
+		tests({
+
+			'permAlone("aab") should return a number.': function() {
+				fail();
+			},
+
+			'permAlone("aab") should return 2.': function() {
+				fail();
+			},
+
+			'permAlone("aaa") should return 0.': function() {
+				fail();
+			},
+
+			'permAlone("aabb") should return 8.': function() {
+				fail();
+			},
+
+			'permAlone("abcdefa") should return 3600.': function() {
+				fail();
+			},
+
+			'permAlone("abfdefa") should return 2640.': function() {
+				fail();
+			},
+
+			'permAlone("zzzzzzzz") should return 0.': function() {
+				fail();
+			},
+
+			'permAlone("a") should return 1.': function() {
+				fail();
+			},
+
+			'permAlone("aaab") should return 0.': function() {
+				fail();
+			},
+
+			'permAlone("aaabb") should return 12.': function() {
+				fail();
+			}
+
+		});
+	</script>
+</body>
+</html>
