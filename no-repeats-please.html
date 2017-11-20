@@ -44,43 +44,53 @@
 		tests({
 
 			'permAlone("aab") should return a number.': function() {
-				fail();
+				var test = permAlone("aab");
+				eq(typeof test, 'number');
 			},
 
 			'permAlone("aab") should return 2.': function() {
-				fail();
+				var test = permAlone("aab");
+				eq(test, 2);
 			},
 
 			'permAlone("aaa") should return 0.': function() {
-				fail();
+				var test = permAlone("aaa");
+				eq(test, 0);
 			},
 
 			'permAlone("aabb") should return 8.': function() {
-				fail();
+				var test = permAlone("aabb");
+				eq(test, 8);
 			},
 
 			'permAlone("abcdefa") should return 3600.': function() {
-				fail();
+				var test = permAlone("abcdefa");
+				eq(test, 3600);
 			},
 
 			'permAlone("abfdefa") should return 2640.': function() {
-				fail();
+				var test = permAlone("abfdefa");
+				eq(test, 2640);
 			},
 
 			'permAlone("zzzzzzzz") should return 0.': function() {
-				fail();
+				var test = permAlone("zzzzzzzz");
+				eq(test, 0);
 			},
 
 			'permAlone("a") should return 1.': function() {
-				fail();
+				var test = permAlone("a");
+				eq(test, 1);
 			},
 
 			'permAlone("aaab") should return 0.': function() {
-				fail();
+				var test = permAlone("aaab");
+				eq(test, 0);
 			},
 
 			'permAlone("aaabb") should return 12.': function() {
-				fail();
+				var test = permAlone("aaabb");
+				eq(test, 12);
 			}
 
 		});
