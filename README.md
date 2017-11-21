@@ -12,6 +12,6 @@ Keep in mind that I didn't refactor any of the code in this challenge. I know I 
 - [x] [Exact Change](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/exact-change.html)
 - [x] [Inventory Update](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/inventory-update.html)
 - [x] [No repeats please](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/no-repeats-please.html)
-- [ ] Make a Person
+- [x] [Make a Person](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/make-a-person.html)
 - [ ] Map the Debris
 - [ ] Pairwise
