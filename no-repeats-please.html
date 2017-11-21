@@ -40,6 +40,7 @@
 		function permAlone(str) {
 			var arr = str.split('');
 			var result = 0;
+			var regex = /([a-z])\1+/;
 
 			function swap(a, b) {
 				var tmp = arr[a];
@@ -48,7 +49,6 @@
 			}
 
 			function generate(n) {
-				var regex = /([a-z])\1+/;
 
 				if (n === 1 && !regex.test(arr.join(''))) {
 					result++;
@@ -65,13 +65,18 @@
 
 		tests({
 
+			'permAlone("abc") should return a number.': function () {
+				debugger;
+				var test = permAlone("abc");
+				eq(typeof test, 'number');
+			},
+
 			'permAlone("aab") should return a number.': function() {
 				var test = permAlone("aab");
 				eq(typeof test, 'number');
 			},
 
 			'permAlone("aab") should return 2.': function() {
-				debugger;
 				var test = permAlone("aab");
 				eq(test, 2);
 			},

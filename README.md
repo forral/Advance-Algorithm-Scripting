@@ -11,7 +11,7 @@ Keep in mind that I didn't refactor any of the code in this challenge. I know I 
 - [x] [Symmetric Difference](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/symmetric-difference.html)
 - [x] [Exact Change](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/exact-change.html)
 - [x] [Inventory Update](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/inventory-update.html)
-- [ ] No repeats please
+- [x] [No repeats please](https://github.com/forral/Advance-Algorithm-Scripting/blob/master/no-repeats-please.html)
 - [ ] Make a Person
 - [ ] Map the Debris
 - [ ] Pairwise
