@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Map the Debris</title>
+	<style>
+    html {
+      font-family: 'helvetica neue';
+    }
+    header {
+      background: white;
+      padding: 1px 10px 10px 10px;
+    }
+    code {
+      font-family: 'Courier New';
+      font-size: 14px;
+      color: blueviolet;
+      background: lightgrey;
+      padding: 1px;
+    }
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Map the Debris</h1>
+		<p>Return a new array that transforms the element's average altitude into their orbital periods.</p>
+		<p>The array will contain objects in the format <code>{name: 'name', avgAlt: avgAlt}</code>.</p>
+		<p>You can read about orbital periods on <a href="https://en.wikipedia.org/wiki/Orbital_period">wikipedia</a>.</p>
+		<p>The values should be rounded to the nearest whole number. The body being orbited is Earth.</p>
+		<p>The radius of the earth is 6367.4447 kilometers, and the GM value of earth is 398600.4418 km3s-2.</p>
+		<ul>
+			<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/pow">Math.pow()</a></li>
+		</ul>
+	</header>
+	<script src="simple-test-lib.js"></script>
+	<script>
+
+		function orbitalPeriod(arr) {
+			var GM = 398600.4418;
+			var earthRadius = 6367.4447;
+
+			var arr = arr.map(function(currentValue) {
+				var rObj = {};
+				rObj.name = currentValue.name;
+				rObj.orbitalPeriod = Math.round(2 * Math.PI * Math.sqrt(Math.pow(earthRadius + currentValue.avgAlt, 3) / GM));
+				return rObj;
+			});
+
+			return arr;
+		}
+
+		tests({
+
+			'orbitalPeriod([{ name: "sputnik", avgAlt: 35873.5553 }]) should return [{ name: "sputnik", orbitalPeriod: 86400 }].': function() {
+				var test = orbitalPeriod([{ name: "sputnik", avgAlt: 35873.5553 }]);
+				eq(test[0]['orbitalPeriod'], 86400);
+			},
+
+			'orbitalPeriod([{ name: "iss", avgAlt: 413.6 }, { name: "hubble", avgAlt: 556.7 }, { name: "moon", avgAlt: 378632.553 }]) should return [{ name: "iss", orbitalPeriod: 5557 }, { name: "hubble", orbitalPeriod: 5734 }, { name: "moon", orbitalPeriod: 2377399 }].': function() {
+				var test = orbitalPeriod([{ name: "iss", avgAlt: 413.6 }, { name: "hubble", avgAlt: 556.7 }, { name: "moon", avgAlt: 378632.553 }]);
+				eq(test[0]['orbitalPeriod'], 5557);
+				eq(test[1]['orbitalPeriod'], 5734);
+				eq(test[2]['orbitalPeriod'], 2377399);
+			}
+			
+		});
+	</script>
+</body>
+</html>
