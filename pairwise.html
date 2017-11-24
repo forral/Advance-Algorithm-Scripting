@@ -93,45 +93,44 @@
 		function pairwise(arr, arg) {
 
 			var usedIndexes = [];
-			var result = [];
 
 			for (let i = 0; i < arr.length; i++) {
-				for (let j = 0; j < arr.length; j++) {
-
-					if (i !== j) {
-						if (arr[i] + arr[j] === arg) {
+				if (usedIndexes.includes(i) === false) {
+					for (let j = 0; j < arr.length; j++) {
+						if (usedIndexes.includes(j) === false && i !== j && arr[i] + arr[j] === arg) {
 							usedIndexes.push(i, j);
-							result.push(arr[i], arr[j]);
+							break;
 						}
 					}
 				}
 			}
 
-			return arg;
+			return usedIndexes.reduce(function (a, b) {
+				return a + b;
+			}, 0);
 		}
 
 		tests({
 
 			'pairwise([1, 4, 2, 3, 0, 5], 7) should return 11.': function() {
-				debugger;
 				eq(pairwise([1, 4, 2, 3, 0, 5], 7), 11);
 			},
 
-			// 'pairwise([1, 3, 2, 4], 4) should return 1.': function() {
-			// 	eq(pairwise([1, 3, 2, 4], 4), 1);
-			// },
+			'pairwise([1, 3, 2, 4], 4) should return 1.': function() {
+				eq(pairwise([1, 3, 2, 4], 4), 1);
+			},
 
-			// 'pairwise([1, 1, 1], 2) should return 1.': function() {
-			// 	eq(pairwise([1, 1, 1], 2), 1);
-			// },
+			'pairwise([1, 1, 1], 2) should return 1.': function() {
+				eq(pairwise([1, 1, 1], 2), 1);
+			},
 
-			// 'pairwise([0, 0, 0, 0, 1, 1], 1) should return 10.': function() {
-			// 	eq(pairwise([0, 0, 0, 0, 1, 1], 1), 10);
-			// },
+			'pairwise([0, 0, 0, 0, 1, 1], 1) should return 10.': function() {
+				eq(pairwise([0, 0, 0, 0, 1, 1], 1), 10);
+			},
 
-			// 'pairwise([], 100) should return 0.': function() {
-			// 	eq(pairwise([], 100), 0);
-			// },
+			'pairwise([], 100) should return 0.': function() {
+				eq(pairwise([], 100), 0);
+			},
 
 		});
 	</script>
